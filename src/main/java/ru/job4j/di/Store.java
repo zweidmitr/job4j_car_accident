@@ -1,4 +1,4 @@
-package di;
+package ru.job4j.di;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
