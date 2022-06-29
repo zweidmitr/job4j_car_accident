@@ -20,21 +20,28 @@
     <title>Accident</title>
 </head>
 <body>
-Hello : ${user}, today you can choose one car from:
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">cars</th>
-            </tr>
-            </thead>
-            <tr th:>
-                <c:forEach var="string" items="${cars}">
-                    <td><c:out value="${string}"/></td>
+<div class="card-body">
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Адрес</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="accident" items="${accidents}">
+                    <tr>
+                        <td><c:out value="${accident.name}"/></td>
+                        <td><c:out value="${accident.text}"/></td>
+                        <td><c:out value="${accident.address}"/></td>
+                    </tr>
                 </c:forEach>
-            </tr>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
