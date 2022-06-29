@@ -15,45 +15,50 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <title>Автонарушение</title>
+    <title>Автонарушения</title>
 </head>
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Автонарушение</a>
+        <a class="navbar-brand" href="#">Автонарушения</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>
-                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>
+<%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
+<%--                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>--%>
             </div>
         </div>
     </nav>
-</div>
-<div class="card-body">
     <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Название</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Адрес</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="accident" items="${accidents}">
+        <form action="<c:url value="/create"/>" method="get">
+            <button type="submit" class="btn btn-secondary btn-sm btn-block">Добавить инцидент</button>
+        </form>
+        <div class="card-body">
+            <div class="row">
+                <table class="table">
+                    <thead>
                     <tr>
-                        <td><c:out value="${accident.name}"/></td>
-                        <td><c:out value="${accident.text}"/></td>
-                        <td><c:out value="${accident.address}"/></td>
+                        <th scope="col">Название</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Адрес</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="accident" items="${accidents}">
+                        <tr>
+                            <td>
+                                <a href="<c:url value='/update?id=${accident.id}'/>"><c:out
+                                        value="${accident.name}"/></a></td>
+                            <td><c:out value="${accident.text}"/></td>
+                            <td><c:out value="${accident.address}"/></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

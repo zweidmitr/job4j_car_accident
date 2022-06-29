@@ -22,10 +22,10 @@
     <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Регистрация нового автонарушения
+                Обновление автонарушения
             </div>
             <div class="card-body">
-                <form action="<c:url value="/save"/>" method="post">
+                <form action="<c:url value="/saveAfterUpdate?id=${accident.id}"/>" method="post">
                     <table>
                         <tbody>
                         <colgroup>
@@ -34,15 +34,17 @@
                         </colgroup>
                         <tr>
                             <td>Название автонарушения:</td>
-                            <td><input type="text" class="form-control" name="name"></td>
+                            <td><input type="text" class="form-control" name="name" value="${accident.name}"></td>
                         </tr>
                         <tr>
                             <td>Описание автонарушения:</td>
-                            <td><textarea class="form-control" name="text" rows="3"></textarea></td>
+                            <td><textarea class="form-control" name="text" rows="3">${accident.text}</textarea>
+                            </td>
                         </tr>
                         <tr>
                             <td>Адрес нарушения:</td>
-                            <td><textarea class="form-control" name="address" rows="2"></textarea></td>
+                            <td><textarea class="form-control" name="address"
+                                          rows="2">${accident.address}</textarea></td>
                         </tr>
                         <tr>
                             <td>
