@@ -46,11 +46,11 @@
                             <col width="75%">
                         </colgroup>
                         <tr>
-                            <td>Название автонарушения:</td>
+                            <td><b>Название автонарушения:</b></td>
                             <td><input type="text" class="form-control" name="name"></td>
                         </tr>
                         <tr>
-                            <td>Тип:</td>
+                            <td><b>Тип:</b></td>
                             <td>
                                 <select class="form-control" name="type.id">
                                     <c:forEach var="type" items="${types}">
@@ -60,29 +60,31 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Статьи:</td>
+                            <td><b>Статьи:</b></td>
                             <td>
                                 <select class="form-control" name="rIds" multiple>
                                     <c:forEach var="rule" items="${rules}">
-                                    <option value="${rule.id}">${rule.name}</option>
+                                        <option value="${rule.id}">${rule.name}</option>
                                     </c:forEach>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Описание автонарушения:</td>
+                            <td><b>Описание автонарушения:</b></td>
                             <td><textarea class="form-control" name="text" rows="3"></textarea></td>
                         </tr>
                         <tr>
-                            <td>Адрес нарушения:</td>
+                            <td><b>Адрес нарушения:</b></td>
                             <td><textarea class="form-control" name="address" rows="2"></textarea></td>
                         </tr>
                         <tr>
                             <td>
-                                <form action="<c:url value="/"/>" method="get">
-                                    <button type="submit" class="btn btn-info mt-3">Вернуться назад</button>
-                                </form>
-                                <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+                                <%--                                <form action="<c:url value="/"/>" method="get">--%>
+                                <%--                                    <button type="submit" class="btn btn-info mt-3">Вернуться назад</button>--%>
+                                <%--                                </form>--%>
+                            </td>
+                            <td align="right">
+                                <button type="submit" class="btn btn-success mt-3">Сохранить</button>
                             </td>
                         </tr>
                         </tbody>

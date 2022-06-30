@@ -18,7 +18,7 @@ public class TypeMem {
     public TypeMem() {
         types.put(1, new AccidentType(1, "Две машины"));
         types.put(2, new AccidentType(2, "Машина и человек"));
-        types.put(3, new AccidentType(3, "Машина и велосипед"));
+        types.put(3, new AccidentType(3, "Машина и самокат"));
         types.put(4, new AccidentType(4, "Машина и домашнее животное"));
     }
 

@@ -45,6 +45,12 @@ public class AccidentControl {
         return "accident/update";
     }
 
+    @GetMapping("/read")
+    public String read(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", accidentService.findById(id));
+        return "accident/read";
+    }
+
     /**
      * @ModelAttribute позволяет получить параметрЫ из строки запроса.
      * Данные на контроллере мы получаем напрямую из запроса HttpRequestServlet.

@@ -52,7 +52,7 @@
                         <tr>
                             <td>
 <%--                                <a href="<c:url value='/update?id=${accident.id}'/>"><c:out--%>
-                                <a href="<c:url value='/update?id=${accident.id}'/>"><c:out
+                                <a href="<c:url value='/read?id=${accident.id}'/>"><c:out
                                         value="${accident.name}"/></a></td>
                             <td><c:out value="${accident.type.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
