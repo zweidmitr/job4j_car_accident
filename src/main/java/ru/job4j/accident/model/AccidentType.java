@@ -7,10 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Accident {
+public class AccidentType {
     private int id;
     private String name;
-    private String text;
-    private String address;
-    private AccidentType type;
+
+    public static AccidentType of(int id, String name) {
+        AccidentType type = new AccidentType();
+        type.id = id;
+        type.name = name;
+        return type;
+    }
+
 }

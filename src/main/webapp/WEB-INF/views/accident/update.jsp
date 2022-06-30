@@ -19,6 +19,19 @@
 </head>
 <body>
 <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Автонарушения</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
+                <%--                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>--%>
+            </div>
+        </div>
+    </nav>
     <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -35,6 +48,16 @@
                         <tr>
                             <td>Название автонарушения:</td>
                             <td><input type="text" class="form-control" name="name" value="${accident.name}"></td>
+                        </tr>
+                        <tr>
+                            <td>Тип</td>
+                            <td>
+                                <select class="form-control" name="type.id">
+                                    <c:forEach var="type" items="${types}">
+                                        <option value="${type.id}">${type.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>Описание автонарушения:</td>

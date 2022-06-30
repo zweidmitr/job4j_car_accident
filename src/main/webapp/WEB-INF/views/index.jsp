@@ -27,8 +27,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-<%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
-<%--                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>--%>
+                <%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
+                <%--                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>--%>
             </div>
         </div>
     </nav>
@@ -42,6 +42,7 @@
                     <thead>
                     <tr>
                         <th scope="col">Название</th>
+                        <th scope="col">Тип</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Адрес</th>
                     </tr>
@@ -52,6 +53,7 @@
                             <td>
                                 <a href="<c:url value='/update?id=${accident.id}'/>"><c:out
                                         value="${accident.name}"/></a></td>
+                            <td><c:out value="${accident.type.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>
                         </tr>
