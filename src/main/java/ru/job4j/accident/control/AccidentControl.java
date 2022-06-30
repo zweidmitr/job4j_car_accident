@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentMem;
 import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.RuleService;
 import ru.job4j.accident.service.TypeService;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @ThreadSafe
 @Controller
@@ -23,28 +25,13 @@ import java.util.List;
 public class AccidentControl {
     private final AccidentService accidentService;
     private final TypeService typeService;
+    private final RuleService ruleService;
 
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("types", typeService.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         return "accident/create";
-    }
-
-    /**
-     * @ModelAttribute позволяет получить параметрЫ из строки запроса.
-     */
-    @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
-        accident.setType(typeService.findById(accident.getType().getId()));
-        accidentService.add(accident);
-        return "redirect:/";
-    }
-
-    @PostMapping("saveAfterUpdate")
-    public String saveAfterUpdate(@ModelAttribute Accident accident) {
-        accident.setType(typeService.findById(accident.getType().getId()));
-        accidentService.update(accident);
-        return "redirect:/";
     }
 
     /**
@@ -54,7 +41,36 @@ public class AccidentControl {
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("accident", accidentService.findById(id));
+        model.addAttribute("rules", ruleService.findAll());
         return "accident/update";
+    }
+
+    /**
+     * @ModelAttribute позволяет получить параметрЫ из строки запроса.
+     * Данные на контроллере мы получаем напрямую из запроса HttpRequestServlet.
+     */
+    @PostMapping("/save")
+    public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
+        setAccident(accident, req);
+        accidentService.add(accident);
+        return "redirect:/";
+    }
+
+    @PostMapping("saveAfterUpdate")
+    public String saveAfterUpdate(@ModelAttribute Accident accident, HttpServletRequest req) {
+        setAccident(accident, req);
+        accidentService.update(accident);
+        return "redirect:/";
+    }
+
+    private void setAccident(@ModelAttribute Accident accident, HttpServletRequest req) {
+        accident.setType(typeService.findById(accident.getType().getId()));
+        String[] ids = req.getParameterValues("rIds");
+        Set<Rule> rules = new HashSet<>();
+        for (String id : ids) {
+            rules.add(ruleService.findById(Integer.parseInt(id)));
+        }
+        accident.setRules(rules);
     }
 
 }

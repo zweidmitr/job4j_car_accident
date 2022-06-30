@@ -60,6 +60,16 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Статьи:</td>
+                            <td>
+                                <select class="form-control" name="rIds" multiple>
+                                    <c:forEach var="rule" items="${rules}">
+                                    <option value="${rule.id}">${rule.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Описание автонарушения:</td>
                             <td><textarea class="form-control" name="text" rows="3"></textarea></td>
                         </tr>

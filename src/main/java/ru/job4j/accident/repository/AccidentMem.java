@@ -16,8 +16,16 @@ public class AccidentMem {
     private final AtomicInteger id = new AtomicInteger(2);
 
     private AccidentMem() {
-        accidents.put(0, new Accident(0, "Котастрофа", "кот балкон прыжок мяу-мяу", "Питер",null));
-        accidents.put(1, new Accident(1, "Самоскат", "спуск нева бултых поплыли", "там же",null));
+        accidents.put(0, new Accident(
+                0, "Котастрофа",
+                "кот балкон прыжок мяу-мяу",
+                "Питер",
+                null,null));
+        accidents.put(1, new Accident(
+                1, "Самоскат",
+                "спуск нева бултых поплыли",
+                "там же",
+                null,null));
     }
 
     public void add(Accident accident) {
