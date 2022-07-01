@@ -28,7 +28,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
-                <%--                <a class="nav-item nav-link " href='<c:url value="/create"/>'>Добавить инцидент</a>--%>
+                <a class="nav-item nav-link " href='<c:url value="/addType"/>'>Добавить тип</a>
+                <a class="nav-item nav-link " href='<c:url value="/addRule"/>'>Добавить статьи</a>
             </div>
         </div>
     </nav>
@@ -45,18 +46,24 @@
                         <th scope="col">Тип</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Адрес</th>
+                        <th scope="col">Стереть</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="accident" items="${accidents}">
                         <tr>
                             <td>
-<%--                                <a href="<c:url value='/update?id=${accident.id}'/>"><c:out--%>
+                                    <%--                                <a href="<c:url value='/update?id=${accident.id}'/>"><c:out--%>
                                 <a href="<c:url value='/read?id=${accident.id}'/>"><c:out
                                         value="${accident.name}"/></a></td>
                             <td><c:out value="${accident.type.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>
+                            <td>
+                                <form action="<c:url value="/delete/${accident.id}"/>" method="get">
+                                    <button type="submit" class="btn btn-danger mt-3">Удалить</button>
+                                </form>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

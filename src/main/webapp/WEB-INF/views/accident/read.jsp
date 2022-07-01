@@ -61,7 +61,7 @@
                         <td>
                             <select disabled class="form-control" name="rIds" multiple>
                                 <c:forEach var="rule" items="${accident.rules}">
-                                    <option value="${rule.id}">${rule.name}"</option>
+                                    <option value="${rule.id}">${rule.name}</option>
                                 </c:forEach>
                             </select>
                         </td>

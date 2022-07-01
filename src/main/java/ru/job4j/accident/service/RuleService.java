@@ -4,7 +4,7 @@ import lombok.Data;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.RuleStore;
+import ru.job4j.accident.repository.jdbc.RuleJdbcTemplate;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import java.util.Collection;
 @Service
 @Data
 public class RuleService {
-    private final RuleStore store;
+    private final RuleJdbcTemplate store;
 
     public Collection<Rule> findAll() {
         return store.findAll();
@@ -20,5 +20,13 @@ public class RuleService {
 
     public Rule findById(int id) {
         return store.findById(id);
+    }
+
+    public void delete(int id) {
+        store.delete(id);
+    }
+
+    public void add(Rule rule) {
+        store.add(rule);
     }
 }

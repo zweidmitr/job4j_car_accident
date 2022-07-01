@@ -4,14 +4,9 @@ import lombok.Data;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentMem;
 import ru.job4j.accident.service.AccidentService;
 import ru.job4j.accident.service.RuleService;
 import ru.job4j.accident.service.TypeService;
@@ -66,6 +61,11 @@ public class AccidentControl {
     public String saveAfterUpdate(@ModelAttribute Accident accident, HttpServletRequest req) {
         setAccident(accident, req);
         accidentService.update(accident);
+        return "redirect:/";
+    }
+    @GetMapping("delete/{accId}")
+    public String delete(@PathVariable ("accId") int id) {
+        accidentService.delete(id);
         return "redirect:/";
     }
 

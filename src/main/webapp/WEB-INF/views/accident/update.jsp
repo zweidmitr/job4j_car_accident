@@ -64,7 +64,7 @@
                             <td>
                                 <select class="form-control" name="rIds" multiple>
                                     <c:forEach var="rule" items="${rules}">
-                                        <option value="${rule.id}">${rule.name}"</option>
+                                    <option value="${rule.id}">${rule.name}</option>
                                     </c:forEach>
                                 </select>
                             </td>
@@ -81,9 +81,6 @@
                         </tr>
                         <tr>
                             <td>
-<%--                                <form action="<c:url value="/"/>" method="get">--%>
-<%--                                    <button type="submit" class="btn btn-info mt-3">Вернуться назад</button>--%>
-<%--                                </form>--%>
                             </td>
                             <td align="right">
                                 <button type="submit" class="btn btn-success mt-3">Сохранить</button>

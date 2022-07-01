@@ -1,4 +1,4 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.memory;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;

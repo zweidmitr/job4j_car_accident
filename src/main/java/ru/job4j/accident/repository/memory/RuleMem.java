@@ -1,4 +1,4 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.memory;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
@@ -11,10 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @ThreadSafe
 @Repository
-public class RuleStore {
+public class RuleMem {
     private final Map<Integer, Rule> rules = new ConcurrentHashMap<>();
 
-    public RuleStore() {
+    public RuleMem() {
         rules.put(1, (new Rule(1, "Статья. 1")));
         rules.put(2, (new Rule(2, "Статья. 2")));
         rules.put(3, (new Rule(3, "Статья. 3")));
