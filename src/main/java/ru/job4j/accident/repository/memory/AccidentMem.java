@@ -20,12 +20,12 @@ public class AccidentMem {
                 0, "Котастрофа",
                 "кот балкон прыжок мяу-мяу",
                 "Питер",
-                null,null));
+                null, null));
         accidents.put(1, new Accident(
                 1, "Самоскат",
                 "спуск нева бултых поплыли",
                 "там же",
-                null,null));
+                null, null));
     }
 
     public void add(Accident accident) {
@@ -43,7 +43,7 @@ public class AccidentMem {
     }
 
     public void update(Accident accident) {
-        accidents.replace(accident.getId(),accident);
+        accidents.replace(accident.getId(), accident);
     }
 
     public void delete(int id) {

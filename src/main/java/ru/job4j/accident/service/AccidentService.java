@@ -4,6 +4,7 @@ import lombok.Data;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.repository.hibernate.AccidentHibernate;
 import ru.job4j.accident.repository.jdbc.AccidentJdbcTemplate;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Collection;
 @Service
 @Data
 public class AccidentService {
-    private final AccidentJdbcTemplate store;
+    private final AccidentHibernate store;
 
     public void add(Accident accident) {
         store.add(accident);

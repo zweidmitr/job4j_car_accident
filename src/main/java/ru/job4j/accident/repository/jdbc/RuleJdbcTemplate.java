@@ -8,7 +8,6 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 
-@Repository
 @Data
 public class RuleJdbcTemplate {
     private final JdbcTemplate jdbc;

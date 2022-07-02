@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-@Configuration
 @PropertySource("classpath:app.properties") /* - эта аннотация говорит Spring считать файл.
 Далее настройки можно получить через аннотацию @Value. */
 @EnableTransactionManagement

@@ -4,6 +4,7 @@ import lombok.Data;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.hibernate.RuleHibernate;
 import ru.job4j.accident.repository.jdbc.RuleJdbcTemplate;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Collection;
 @Service
 @Data
 public class RuleService {
-    private final RuleJdbcTemplate store;
+    private final RuleHibernate store;
 
     public Collection<Rule> findAll() {
         return store.findAll();

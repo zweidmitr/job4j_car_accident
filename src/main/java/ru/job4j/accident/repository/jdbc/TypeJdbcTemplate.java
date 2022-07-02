@@ -9,7 +9,6 @@ import ru.job4j.accident.model.AccidentType;
 import java.util.Collection;
 
 @Data
-@Repository
 public class TypeJdbcTemplate {
     private final JdbcTemplate jdbc;
 
