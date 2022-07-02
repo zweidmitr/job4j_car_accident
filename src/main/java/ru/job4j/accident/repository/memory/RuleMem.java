@@ -4,13 +4,15 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Rule;
 
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ThreadSafe
-@Repository
 public class RuleMem {
     private final Map<Integer, Rule> rules = new ConcurrentHashMap<>();
 
@@ -25,7 +27,14 @@ public class RuleMem {
         return new ArrayList<>(rules.values());
     }
 
-    public Rule findById(int id) {
-        return rules.get(id);
+    public Optional<Rule> findById(int id) {
+        Rule rule;
+        try {
+            rule = rules.get(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(rule);
     }
 }

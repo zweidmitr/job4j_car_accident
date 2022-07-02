@@ -35,14 +35,16 @@ public class AccidentControl {
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("types", typeService.findAll());
-        model.addAttribute("accident", accidentService.findById(id));
+        model.addAttribute("accident", accidentService.findById(id).get());
         model.addAttribute("rules", ruleService.findAll());
         return "accident/update";
     }
 
     @GetMapping("/read")
     public String read(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidentService.findById(id));
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("accident", accidentService.findById(id).get());
+        model.addAttribute("rules", ruleService.findAll());
         return "accident/read";
     }
 
@@ -65,16 +67,17 @@ public class AccidentControl {
     }
     @GetMapping("delete/{accId}")
     public String delete(@PathVariable ("accId") int id) {
-        accidentService.delete(id);
+        Accident accident = accidentService.findById(id).get();
+        accidentService.delete(accident);
         return "redirect:/";
     }
 
     private void setAccident(@ModelAttribute Accident accident, HttpServletRequest req) {
-        accident.setType(typeService.findById(accident.getType().getId()));
+        accident.setType(typeService.findById(accident.getType().getId()).get());
         String[] ids = req.getParameterValues("rIds");
         Set<Rule> rules = new HashSet<>();
         for (String id : ids) {
-            rules.add(ruleService.findById(Integer.parseInt(id)));
+            rules.add(ruleService.findById(Integer.parseInt(id)).get());
         }
         accident.setRules(rules);
     }

@@ -6,14 +6,15 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class RuleHibernate implements DBStoreSession {
     private final SessionFactory sf;
 
-    public Rule add(Rule rule) {
-        return  tx(session -> {
+    public Rule save(Rule rule) {
+        return tx(session -> {
             session.save(rule);
             return rule;
         }, sf);
@@ -25,14 +26,21 @@ public class RuleHibernate implements DBStoreSession {
                 .getResultList(), sf);
     }
 
-    public Rule findById(int id) {
-        return tx(session -> session.get(Rule.class, id), sf);
+    public Optional<Rule> findById(int id) {
+        Rule rule;
+        try {
+            rule = tx(session -> session.get(Rule.class, id), sf);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(rule);
     }
 
-    public void delete(int id) {
+    public void delete(Rule rule) {
         tx(session -> session.createQuery(
                         "delete from Rule r where r.id = :rId")
-                .setParameter("rId", id)
+                .setParameter("rId", rule.getId())
                 .executeUpdate(), sf);
     }
 

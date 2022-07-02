@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS accident_rule
 drop table accident_type cascade;
 drop table rule cascade;
 drop table accident cascade;
+drop table accident_rule cascade;
 
 INSERT INTO accident_type (name)
 values ('Две машины'),

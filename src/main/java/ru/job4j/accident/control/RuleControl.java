@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.RuleService;
 
+import javax.swing.text.html.Option;
+
 @Controller
 @Data
 public class RuleControl {
@@ -30,7 +32,8 @@ public class RuleControl {
 
     @GetMapping("deleteRule/{ruleId}")
     public String deleteRule(@PathVariable("ruleId") int id) {
-        rules.delete(id);
+        Rule rule = rules.findById(id).get();
+        rules.delete(rule);
         return "redirect:/addRule";
     }
 

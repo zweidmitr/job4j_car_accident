@@ -35,4 +35,9 @@ public class Rule {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return String.format("Rule: id= %s, name= %s", id, name);
+    }
+
 }

@@ -6,11 +6,11 @@ import ru.job4j.accident.model.Accident;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
-@Repository
 public class AccidentMem {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final AtomicInteger id = new AtomicInteger(2);
@@ -28,14 +28,21 @@ public class AccidentMem {
                 null, null));
     }
 
-    public void add(Accident accident) {
+    public void save(Accident accident) {
         int newId = id.incrementAndGet();
         accident.setId(newId);
         accidents.putIfAbsent(newId, accident);
     }
 
-    public Accident findById(int id) {
-        return accidents.get(id);
+    public Optional<Accident> findById(int id) {
+        Accident accident;
+        try {
+            accident = accidents.get(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(accident);
     }
 
     public Collection<Accident> findAll() {
@@ -46,7 +53,7 @@ public class AccidentMem {
         accidents.replace(accident.getId(), accident);
     }
 
-    public void delete(int id) {
-        accidents.remove(id);
+    public void delete(Accident accident) {
+        accidents.remove(accident.getId());
     }
 }

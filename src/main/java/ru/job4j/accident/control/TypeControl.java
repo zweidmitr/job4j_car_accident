@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.TypeService;
 
+import java.util.Optional;
+
 @Controller
 @Data
 public class TypeControl {
@@ -30,7 +32,8 @@ public class TypeControl {
 
     @GetMapping("deleteType/{typeId}")
     public String deleteType(@PathVariable("typeId") int id) {
-        types.delete(id);
+        AccidentType type = types.findById(id).get();
+        types.delete(type);
         return "redirect:/addType";
     }
 

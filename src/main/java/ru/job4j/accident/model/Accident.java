@@ -21,7 +21,7 @@ public class Accident {
     @ManyToOne
     @JoinColumn(name = "type_id", foreignKey = @ForeignKey(name = "TYPE_ID_FK"))
     private AccidentType type;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "accident_rule", joinColumns = {
             @JoinColumn(name = "accident_id", nullable = false)},
             inverseJoinColumns = {
@@ -43,5 +43,10 @@ public class Accident {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Accident: id= %s, name= %s", id, name);
     }
 }

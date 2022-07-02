@@ -6,13 +6,14 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.AccidentType;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class TypeHibernate implements DBStoreSession {
     private final SessionFactory sf;
 
-    public AccidentType add(AccidentType type) {
+    public AccidentType save(AccidentType type) {
 
         return tx(session -> {
             session.save(type);
@@ -26,14 +27,21 @@ public class TypeHibernate implements DBStoreSession {
                 .getResultList(), sf);
     }
 
-    public AccidentType findById(int id) {
-        return tx(session -> session.get(AccidentType.class, id), sf);
+    public Optional<AccidentType> findById(int id) {
+        AccidentType type;
+        try{
+            type = tx(session -> session.get(AccidentType.class, id), sf);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(type);
     }
 
-    public void delete(int id) {
+    public void delete(AccidentType type) {
         tx(session -> session.createQuery(
                         "delete from AccidentType at where at.id = : atId")
-                .setParameter("atId", id)
+                .setParameter("atId", type.getId())
                 .executeUpdate(), sf);
     }
 }

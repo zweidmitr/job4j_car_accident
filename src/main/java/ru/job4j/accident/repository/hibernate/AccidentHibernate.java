@@ -7,18 +7,18 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class AccidentHibernate implements DBStoreSession {
     private final SessionFactory sf;
 
-    public Accident add(Accident accident) {
+    public Accident save(Accident accident) {
         return tx(session -> {
             session.save(accident);
             return accident;
         }, sf);
-
     }
 
     public Collection<Accident> findAll() {
@@ -30,20 +30,27 @@ public class AccidentHibernate implements DBStoreSession {
                 .getResultList(), sf);
     }
 
-    public Accident findById(int id) {
-        return tx(session -> session.createQuery(
-                        "select distinct a from Accident a "
-                                + "join fetch a.type type "
-                                + "join fetch a.rules rules "
-                                + "where a.id = :aId", Accident.class)
-                .setParameter("aId", id)
-                .getSingleResult(), sf);
+    public Optional<Accident> findById(int id) {
+        Accident accident;
+        try {
+            accident = tx(session -> session.createQuery(
+                            "select distinct a from Accident a "
+                                    + "join fetch a.type type "
+                                    + "join fetch a.rules rules "
+                                    + "where a.id = :aId", Accident.class)
+                    .setParameter("aId", id)
+                    .getSingleResult(), sf);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+        return Optional.of(accident);
     }
 
-    public void delete(int id) {
+    public void delete(Accident accident) {
         tx(session -> session.createQuery(
                         "delete from Accident a where a.id = :aId")
-                .setParameter("aId", id)
+                .setParameter("aId", accident.getId())
                 .executeUpdate(), sf);
     }
 
