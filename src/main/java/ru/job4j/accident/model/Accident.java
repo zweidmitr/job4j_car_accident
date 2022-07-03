@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "accident")
+@NamedEntityGraph(name = "aRules", attributeNodes = @NamedAttributeNode("rules"))
 public class Accident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
