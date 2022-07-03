@@ -29,8 +29,11 @@
             <div class="navbar-nav">
                 <%--                <a class="nav-item nav-link active" href="<c:url value="/"/>">Все инциденты</a>--%>
                 <a class="nav-item nav-link " href='<c:url value="/addType"/>'>Добавить тип</a>
-                <a class="nav-item nav-link " href='<c:url value="/addRule"/>'>Добавить статьи</a>
-                    <a href="<c:url value="/logout"/>" class="btn btn-light pull-right" role="button">Выйти</a>
+                    <div class="text-right">
+                        <input type="button" value="${user.username}">
+                        <a href="<c:url value="/logout"/>" class="btn btn-light pull-right" role="button">Выйти</a>
+                    </div>
+
             </div>
         </div>
     </nav>
