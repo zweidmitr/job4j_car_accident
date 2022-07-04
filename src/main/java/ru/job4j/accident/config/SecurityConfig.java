@@ -24,22 +24,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource ds;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(ds)
-                .withUser(User.withUsername("user")
-                        .password(passwordEncoder().encode("123"))
-                        .roles("USER"))
-                .withUser(User.withUsername("admin")
-                        .password(passwordEncoder().encode("123"))
-                        .roles("ADMIN"));
-    }
 
     /**
      * Метод configure(auth) содержит описание, как искать пользователей. В этом примере мы загружаем их в память.
      * У каждого пользователя есть роль. По роли мы определяем, что пользователь может делать.
      */
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(ds)
+                .usersByUsernameQuery("select username, password, enabled "
+                        + "from users where username = ?")
+                .authoritiesByUsernameQuery(
+                        " select u.username, a.authority "
+                                + "from authorities as a, users as u "
+                                + " where u.username = ? and u.authority_id = a.id");
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/login", "/reg")
                 .permitAll()
                 .antMatchers("/**")
                 .hasAnyRole("ADMIN", "USER")
