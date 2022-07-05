@@ -24,6 +24,11 @@
         <div class="w-100 card">
             <div class="card-body">
                 <div class="alert text-center" role="alert">Регистрация</div>
+                <c:if test="${not empty errorMessage}">
+                    <div style="color: red; font-weight: bold; margin: 30px 0px;">
+                        ${errorMessage}
+                    </div>
+                </c:if>
                 <form name="reg" action="<c:url value="/reg"/>" method="post">
                     <table>
                         <tr>
